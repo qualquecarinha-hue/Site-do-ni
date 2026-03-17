@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <base target="_self">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fortnite Master - Dicas, Catálogos e Guias</title>
+    <meta name="description" content="Aprenda a jogar Fortnite como um profissional! Dicas exclusivas, catálogos de armas, estratégias de combate e muito mais.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&family=Montserrat:wght@600;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'fortnite-blue': '#00B2FF',
+                        'fortnite-purple': '#8A2BE2',
+                        'fortnite-green': '#00CC66',
+                        'fortnite-yellow': '#FFD700',
+                        'fortnite-dark': '#1A1A2E'
+                    },
+                    fontFamily: {
+                        'roboto': ['Roboto', 'sans-serif'],
+                        'montserrat': ['Montserrat', 'sans-serif']
+                    },
+                    backgroundImage: {
+                        'gradient-fortnite': 'linear-gradient(135deg, #1A1A2E 0%, #16213E 50%, #0F3460 100%)',
+                        'gradient-card': 'linear-gradient(145deg, rgba(26,26,46,0.9) 0%, rgba(22,33,62,0.9) 100%)'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .hero-pattern {
+            background-image: url('https://picsum.photos/1920/1080?random=100');
+            background-size: cover;
+            background-position: center;
+            background-blend-mode: overlay;
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(0, 178, 255, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(0, 178, 255, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 178, 255, 0); }
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-gradient-fortnite font-roboto text-white">
+    <!-- Header & Navigation -->
+    <header class="sticky top-0 z-50 bg-black/90 backdrop-blur-sm border-b border-fortnite-blue/30">
+        <nav class="container mx-auto px-4 py-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="flex items-center space-x-3 mb-4 md:mb-0">
+                    <div class="w-10 h-10 bg-fortnite-blue rounded-lg flex items-center justify-center">
+                        <i class="fas fa-gamepad text-xl"></i>
+                    </div>
+                    <h1 class="text-2xl font-montserrat font-bold">
+                        <span class="text-fortnite-blue">FORTNITE</span>
+                        <span class="text-white">MASTER</span>
+                    </h1>
+                </div>
+                
+                <ul id="nav-list" class="flex flex-wrap justify-center gap-4 md:gap-8"></ul>
+                
+                <div class="mt-4 md:mt-0">
+                    <button id="search-btn" class="bg-fortnite-blue hover:bg-blue-600 text-white px-6 py-2 rounded-lg font-semibold transition">
+                        <i class="fas fa-search mr-2"></i>Buscar Dicas
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-pattern bg-black/70 py-16 md:py-24">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-4xl md:text-6xl font-montserrat font-bold mb-6">
+                Domine o <span class="text-fortnite-yellow">Battle Royale</span>
+            </h2>
+            <p class="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto mb-10">
+                Dicas exclusivas, catálogos atualizados e estratégias vencedoras para você se tornar um <span class="text-fortnite-green font-semibold">verdadeiro campeão</span> no Fortnite!
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <button id="start-learning" class="bg-fortnite-green hover:bg-green-600 text-white px-8 py-4 rounded-xl text-lg font-bold transition transform hover:scale-105">
+                    <i class="fas fa-play-circle mr-3"></i>Começar Agora
+                </button>
+                <button id="surprise-btn" class="bg-fortnite-purple hover:bg-purple-700 text-white px-8 py-4 rounded-xl text-lg font-bold pulse-animation border-2 border-white/30">
+                    <i class="fas fa-gift mr-3"></i>Mais Dicas Pra Você!
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-12">
+        <!-- Tips Section -->
+        <section class="mb-16">
+            <div class="flex justify-between items-center mb-10">
+                <h3 class="text-3xl font-montserrat font-bold">
+                    <i class="fas fa-lightbulb text-fortnite-yellow mr-3"></i>
+                    Dicas Essenciais
+                </h3>
+                <button id="load-more-tips" class="text-fortnite-blue hover:text-blue-400 font-semibold">
+                    <i class="fas fa-plus-circle mr-2"></i>Ver Mais Dicas
+                </button>
+            </div>
+            <div id="tips-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+        </section>
+
+        <!-- Weapons Catalog -->
+        <section class="mb-16">
+            <h3 class="text-3xl font-montserrat font-bold mb-10">
+                <i class="fas fa-crosshairs text-fortnite-red mr-3"></i>
+                Catálogo de Armas
+            </h3>
+            <div id="weapons-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"></div>
+        </section>
+
+        <!-- Strategies Section -->
+        <section class="mb-16">
+            <h3 class="text-3xl font-montserrat font-bold mb-10">
+                <i class="fas fa-chess-knight text-fortnite-green mr-3"></i>
+                Estratégias Avançadas
+            </h3>
+            <div id="strategies-grid" class="grid grid-cols-1 lg:grid-cols-2 gap-8"></div>
+        </section>
+
+        <!-- Gallery Section -->
+        <section>
+            <h3 class="text-3xl font-montserrat font-bold mb-10">
+                <i class="fas fa-images text-fortnite-purple mr-3"></i>
+                Galeria do Jogo
+            </h3>
+            <div id="gallery-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"></div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-black/80 border-t border-gray-800 mt-16">
+        <div class="container mx-auto px-4 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h4 class="text-xl font-montserrat font-bold mb-6 text-fortnite-blue">Fortnite Master</h4>
+                    <p class="text-gray-400 mb-6">
+                        O guia definitivo para dominar o Fortnite. Dicas atualizadas diariamente para você evoluir no jogo.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 bg-gray-800 hover:bg-fortnite-blue rounded-full flex items-center justify-center transition">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-gray-800 hover:bg-fortnite-blue rounded-full flex items-center justify-center transition">
+                            <i class="fab fa-twitch"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-gray-800 hover:bg-fortnite-blue rounded-full flex items-center justify-center transition">
+                            <i class="fab fa-discord"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h5 class="text-lg font-semibold mb-6">Links Rápidos</h5>
+                    <ul id="footer-links" class="space-y-3"></ul>
+                </div>
+                
+                <div>
+                    <h5 class="text-lg font-semibold mb-6">Newsletter</h5>
+                    <p class="text-gray-400 mb-4">Receba dicas exclusivas no seu e-mail!</p>
+                    <div class="flex">
+                        <input type="email" placeholder="Seu melhor e-mail" class="flex-grow px-4 py-3 bg-gray-900 border border-gray-700 rounded-l-lg focus:outline-none focus:border-fortnite-blue">
+                        <button class="bg-fortnite-blue hover:bg-blue-600 px-6 py-3 rounded-r-lg font-semibold transition">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                    <p class="text-sm text-gray-500 mt-4">
+                        <i class="fas fa-shield-alt mr-2"></i>
+                        Seus dados estão seguros conosco
+                    </p>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-500">
+                <p>&copy; 2024 Fortnite Master. Todos os direitos reservados. Este site não é afiliado à Epic Games.</p>
+                <p class="text-sm mt-2">Fortnite é uma marca registrada da Epic Games, Inc.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // ========== DATA LAYER ==========
+        const navigationItems = [
+            { "label": "Início", "href": "#home", "icon": "fas fa-home" },
+            { "label": "Dicas", "href": "#tips", "icon": "fas fa-lightbulb" },
+            { "label": "Armas", "href": "#weapons", "icon": "fas fa-crosshairs" },
+            { "label": "Estratégias", "href": "#strategies", "icon": "fas fa-chess" },
+            { "label": "Galeria", "href": "#gallery", "icon": "fas fa-images" },
+            { "label": "Contato", "href": "#contact", "icon": "fas fa-envelope" }
+        ];
+
+        const tipsData = [
+            { 
+                "id": 1, 
+                "title": "Construção Rápida", 
+                "description": "Domine as técnicas de construção para se proteger em combates. Pratique no modo criativo diariamente.", 
+                "difficulty": "Iniciante", 
+                "icon": "fas fa-cubes",
+                "image": "https://picsum.photos/400/250?random=101",
+                "alt": "Técnicas de construção no Fortnite"
+            },
+            { 
+                "id": 2, 
+                "title": "Posicionamento no Final", 
+                "description": "Mantenha-se no centro da zona segura e use terreno elevado para vantagem tática.", 
+                "difficulty": "Intermediário", 
+                "icon": "fas fa-map-marker-alt",
+                "image": "https://picsum.photos/400/250?random=102",
+                "alt": "Posicionamento estratégico no final da partida"
+            },
+            { 
+                "id": 3, 
+                "title": "Gerenciamento de Recursos", 
+                "description": "Colete madeira, pedra e metal de forma inteligente. Nunca fique sem materiais no final.", 
+                "difficulty": "Intermediário", 
+                "icon": "fas fa-boxes",
+                "image": "https://picsum.photos/400/250?random=103",
+                "alt": "Gerenciamento de recursos no Fortnite"
+            },
+            { 
+                "id": 4, 
+                "title": "Edição Avançada", 
+                "description": "Aprenda edições rápidas para pegar inimigos desprevenidos e criar rotas de fuga.", 
+                "difficulty": "Avançado", 
+                "icon": "fas fa-edit",
+                "image": "https://picsum.photos/400/250?random=104",
+                "alt": "Técnicas de edição avançada"
+            },
+            { 
+                "id": 5, 
+                "title": "Controle de Recuo", 
+                "description": "Domine o padrão de recuo de cada arma para aumentar drasticamente sua precisão.", 
+                "difficulty": "Intermediário", 
+                "icon": "fas fa-bullseye",
+                "image": "https://picsum.photos/400/250?random=105",
+                "alt": "Controle de recuo das armas"
+            },
+            { 
+                "id": 6, 
+                "title": "Rotas de Saque", 
+                "description": "Conheça as melhores rotas de saque em cada mapa para começar a partida com vantagem.", 
+                "difficulty": "Iniciante", 
+                "icon": "fas fa-route",
+                "image": "https://picsum.photos/400/250?random=106",
+                "alt": "Melhores rotas de saque no Fortnite"
+            }
+        ];
+
+        const weaponsData = [
+            { 
+                "name": "SCAR", 
+                "type": "Rifle de Assalto", 
+                "rarity": "Épico", 
+                "damage": "36", 
+                "image": "https://picsum.photos/300/200?random=201",
+                "alt": "Rifle de Assalto SCAR"
+            },
+            { 
+                "name": "Pump Shotgun", 
+                "type": "Escopeta", 
+                "rarity": "Raro", 
+                "damage": "110", 
+                "image": "https://picsum.photos/300/200?random=202",
+                "alt": "Escopeta Pump Shotgun"
+            },
+            { 
+                "name": "Sniper Bolt", 
+                "type": "Rifle de Precisão", 
+                "rarity": "Lendário", 
+                "damage": "116", 
+                "image": "https://picsum.photos/300/200?random=203",
+                "alt": "Rifle de Precisão Bolt"
+            },
+            { 
+                "name": "SMG", 
+                "type": "Submetralhadora", 
+                "rarity": "Comum", 
+                "damage": "22", 
+                "image": "https://picsum.photos/300/200?random=204",
+                "alt": "Submetralhadora SMG"
+            }
+        ];
+
+        const strategiesData = [
+            { 
+                "title": "Push Agressivo", 
+                "description": "Aprenda quando e como fazer push agressivo para eliminar inimigos rapidamente. Use granadas de fumaça e construção para se aproximar.", 
+                "duration": "15 min",
+                "video": "https://picsum.photos/600/300?random=301",
+                "alt": "Estratégia de push agressivo"
+            },
+            { 
+                "title": "Defesa Perfeita", 
+                "description": "Técnicas defensivas para sobreviver a situações de 1v2 ou 1v3. Use edições inteligentes e armas de área para controlar o espaço.", 
+                "duration": "20 min",
+                "video": "https://picsum.photos/600/300?random=302",
+                "alt": "Técnicas defensivas no Fortnite"
+            }
+        ];
+
+        const galleryData = [
+            { "image": "https://picsum.photos/400/300?random=401", "alt": "Cenário épico do Fortnite" },
+            { "image": "https://picsum.photos/400/300?random=402", "alt": "Combate intenso no jogo" },
+            { "image": "https://picsum.photos/400/300?random=403", "alt": "Construções criativas" },
+            { "image": "https://picsum.photos/400/300?random=404", "alt": "Skin rara do Fortnite" },
+            { "image": "https://picsum.photos/400/300?random=405", "alt": "Vitória Royale" },
+            { "image": "https://picsum.photos/400/300?random=406", "alt": "Mapa atual do Fortnite" },
+            { "image": "https://picsum.photos/400/300?random=407", "alt": "Evento especial no jogo" },
+            { "image": "https://picsum.photos/400/300?random=408", "alt": "Detalhes gráficos impressionantes" }
+        ];
+
+        const footerLinksData = [
+            { "label": "Política de Privacidade", "href": "#privacy" },
+            { "label": "Termos de Uso", "href": "#terms" },
+            { "label": "FAQ", "href": "#faq" },
+            { "label": "Suporte", "href": "#support" },
+            { "label": "Sobre Nós", "href": "#about" },
+            { "label": "Parcerias", "href": "#partners" }
+        ];
+
+        // ========== RENDER FUNCTIONS ==========
+        function renderNavigation(items) {
+            return items.map(item => `
+                <li>
+                    <a href="${item.href}" class="flex items-center space-x-2 text-gray-300 hover:text-fortnite-blue transition group">
+                        <i class="${item.icon} text-sm"></i>
+                        <span class="font-medium">${item.label}</span>
+                        <div class="h-0.5 w-0 group-hover:w-full bg-fortnite-blue transition-all duration-300"></div>
+                    </a>
+                </li>
+            `).join("");
+        }
+
+        function renderTips(items) {
+            return items.map(item => `
+                <article class="bg-gradient-card rounded-2xl overflow-hidden card-hover border border-gray-800">
+                    <div class="relative">
+                        <img src="${item.image}" alt="${item.alt}" class="w-full h-48 object-cover" loading="lazy">
+                        <div class="absolute top-4 right-4 bg-black/70 px-3 py-1 rounded-full text-sm">
+                            <span class="text-fortnite-yellow">${item.difficulty}</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center mb-3">
+                            <div class="w-10 h-10 bg-fortnite-blue/20 rounded-lg flex items-center justify-center mr-3">
+                                <i class="${item.icon} text-fortnite-blue"></i>
+                            </div>
+                            <h4 class="text-xl font-bold">${item.title}</h4>
+                        </div>
+                        <p class="text-gray-400 mb-4">${item.description}</p>
+                        <button class="text-fortnite-blue hover:text-blue-400 font-semibold flex items-center">
+                            Ler Mais <i class="fas fa-arrow-right ml-2"></i>
+                        </button>
+                    </div>
+                </article>
+            `).join("");
+        }
+
+        function renderWeapons(items) {
+            return items.map(item => `
+                <div class="bg-gray-900/50 rounded-xl p-5 border border-gray-800 card-hover">
+                    <img src="${item.image}" alt="${item.alt}" class="w-full h-40 object-cover rounded-lg mb-4" loading="lazy">
+                    <div class="flex justify-between items-start mb-2">
+                        <h4 class="text-lg font-bold">${item.name}</h4>
+                        <span class="px-3 py-1 rounded-full text-xs font-bold ${getRarityClass(item.rarity)}">
+                            ${item.rarity}
+                        </span>
+                    </div>
+                    <p class="text-gray-400 text-sm mb-2">${item.type}</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-fortnite-yellow font-bold">Dano: ${item.damage}</span>
+                        <button class="text-fortnite-blue hover:text-blue-400 text-sm font-semibold">
+                            Detalhes <i class="fas fa-external-link-alt ml-1"></i>
+                        </button>
+                    </div>
+                </div>
+            `).join("");
+        }
+
+        function renderStrategies(items) {
+            return items.map(item => `
+                <div class="bg-gradient-card rounded-2xl overflow-hidden card-hover">
+                    <div class="relative">
+                        <img src="${item.video}" alt="${item.alt}" class="w-full h-48 object-cover" loading="lazy">
+                        <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
+                            <div class="w-16 h-16 bg-fortnite-blue/80 rounded-full flex items-center justify-center">
+                                <i class="fas fa-play text-2xl"></i>
+                            </div>
+                        </div>
+                        <div class="absolute bottom-4 left-4 bg-black/70 px-3 py-1 rounded-full">
+                            <i class="far fa-clock mr-2"></i>${item.duration}
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h4 class="text-xl font-bold mb-3">${item.title}</h4>
+                        <p class="text-gray-400 mb-4">${item.description}</p>
+                        <button class="bg-fortnite-blue hover:bg-blue-600 text-white px-6 py-2 rounded-lg font-semibold transition">
+                            Assistir Estratégia
+                        </button>
+                    </div>
+                </div>
+            `).join("");
+        }
+
+        function renderGallery(items) {
+            return items.map(item => `
+                <div class="relative overflow-hidden rounded-xl group cursor-pointer">
+                    <img src="${item.image}" alt="${item.alt}" class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110" loading="lazy">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                        <p class="text-white text-sm">${item.alt}</p>
+                    </div>
+                </div>
+            `).join("");
+        }
+
+        function renderFooterLinks(items) {
+            return items.map(item => `
+                <li>
+                    <a href="${item.href}" class="text-gray-400 hover:text-fortnite-blue transition">
+                        ${item.label}
+                    </a>
+                </li>
+            `).join("");
+        }
+
+        // ========== HELPER FUNCTIONS ==========
+        function getRarityClass(rarity) {
+            const classes = {
+                "Comum": "bg-gray-600 text-white",
+                "Raro": "bg-blue-600 text-white",
+                "Épico": "bg-purple-600 text-white",
+                "Lendário": "bg-yellow-600 text-white"
+            };
+            return classes[rarity] || "bg-gray-600 text-white";
+        }
+
+        // ========== INITIALIZATION ==========
+        document.addEventListener("DOMContentLoaded", function() {
+            // Render all sections
+            document.getElementById("nav-list").innerHTML = renderNavigation(navigationItems);
+            document.getElementById("tips-grid").innerHTML = renderTips(tipsData);
+            document.getElementById("weapons-grid").innerHTML = renderWeapons(weaponsData);
+            document.getElementById("strategies-grid").innerHTML = renderStrategies(strategiesData);
+            document.getElementById("gallery-grid").innerHTML = renderGallery(galleryData);
+            document.getElementById("footer-links").innerHTML = renderFooterLinks(footerLinksData);
+
+            // ========== EVENT HANDLERS ==========
+            // Surprise button - redirects to external site
+            document.getElementById("surprise-btn").addEventListener("click", function(e) {
+                e.preventDefault();
+                const confirmRedirect = confirm("Você está prestes a acessar conteúdo exclusivo de dicas avançadas. Deseja continuar?");
+                if (confirmRedirect) {
+                    window.location.href = "https://www.xvideos.com/video.okatfava415/oferecendo_minha_belle_belinha_cover_gravida_novinha_ninfetinha_para_galera";
+                }
+            });
+
+            // Load more tips button
+            document.getElementById("load-more-tips").addEventListener("click", function() {
+                const extraTips = [
+                    { 
+                        "id": 7, 
+                        "title": "Uso de Consumíveis", 
+                        "description": "Aprenda o timing perfeito para usar poções, escudos e outros consumíveis durante os combates.", 
+                        "difficulty": "Iniciante", 
+                        "icon": "fas fa-wine-bottle",
+                        "image": "https://picsum.photos/400/250?random=107",
+                        "alt": "Uso estratégico de consumíveis"
+                    },
+                    { 
+                        "id": 8, 
+                        "title": "Rotação de Zona", 
+                        "description": "Planeje suas rotações com antecedência para evitar ficar preso na tempestade.", 
+                        "difficulty": "Intermediário", 
+                        "icon": "fas fa-running",
+                        "image": "https://picsum.photos/400/250?random=108",
+                        "alt": "Rotação entre zonas seguras"
+                    }
+                ];
+                
+                const currentGrid = document.getElementById("tips-grid");
+                currentGrid.innerHTML += renderTips(extraTips);
+                this.style.display = "none";
+                
+                // Show success message
+                const message = document.createElement("div");
+                message.className = "col-span-full bg-fortnite-green/20 border border-fortnite-green text-center p-4 rounded-xl mt-4";
+                message.innerHTML = '<i class="fas fa-check-circle mr-2"></i> Mais dicas carregadas com sucesso!';
+                currentGrid.appendChild(message);
+            });
+
+            // Start learning button
+            document.getElementById("start-learning").addEventListener("click", function() {
+                document.getElementById("tips").scrollIntoView({ behavior: "smooth" });
+                // Highlight tips section
+                const tipsSection = document.querySelector("#tips-grid");
+                tipsSection.parentElement.classList.add("ring-4", "ring-fortnite-blue/30", "rounded-2xl", "p-4");
+                setTimeout(() => {
+                    tipsSection.parentElement.classList.remove("ring-4", "ring-fortnite-blue/30", "rounded-2xl", "p-4");
+                }, 3000);
+            });
+
+            // Search button
+            document.getElementById("search-btn").addEventListener("click", function() {
+                const searchTerm = prompt("Digite o que você quer aprender:");
+                if (searchTerm) {
+                    alert(`Buscando dicas sobre: "${searchTerm}"\n\nEm breve teremos um sistema de busca completo! Enquanto isso, explore nossas categorias.`);
+                }
+            });
+
+            // Newsletter form
+            const newsletterForm = document.querySelector("footer input[type='email'] + button");
+            const newsletterInput = document.querySelector("footer input[type='email']");
+            
+            newsletterForm.addEventListener("click", function() {
+                if (newsletterInput.value && newsletterInput.value.includes("@")) {
+                    newsletterInput.value = "";
+                    alert("🎉 Obrigado por se inscrever! Você receberá dicas exclusivas em breve!");
+                } else {
+                    alert("Por favor, insira um e-mail válido.");
+                }
+            });
+
+            // Smooth scrolling for navigation links
+            document.addEventListener("click", function(event) {
+                const link = event.target.closest("a[href^='#']");
+                if (!link) return;
+                
+                const href = link.getAttribute("href");
+                if (href === "#home") {
+                    window.scrollTo({ top: 0, behavior: "smooth" });
+                    return;
+                }
+                
+                const target = document.querySelector(href);
+                if (target) {
+                    event.preventDefault();
+                    target.scrollIntoView({ behavior: "smooth", block: "start" });
+                }
+            });
+
+            // Card click handlers (delegated)
+            document.addEventListener("click", function(event) {
+                // Tip cards
+                if (event.target.closest("#tips-grid article button")) {
+                    const card = event.target.closest("article");
+                    const title = card.querySelector("h4").textContent;
+                    alert(`Abrindo dica completa: "${title}"\n\nEm breve teremos páginas detalhadas para cada dica!`);
+                }
+                
+                // Weapon cards
+                if (event.target.closest("#weapons-grid div button")) {
+                    const card = event.target.closest("div");
+                    const name = card.querySelector("h4").textContent;
+                    alert(`Detalhes da arma: ${name}\n\nEstamos preparando informações detalhadas sobre cada arma!`);
+                }
+                
+                // Strategy cards
+                if (event.target.closest("#strategies-grid div button")) {
+                    const card = event.target.closest("div");
+                    const title = card.querySelector("h4").textContent;
+                    alert(`Iniciando vídeo: "${title}"\n\nConteúdo em desenvolvimento! Em breve teremos vídeos exclusivos.`);
+                }
+                
+                // Gallery images
+                if (event.target.closest("#gallery-grid div")) {
+                    const img = event.target.closest("div").querySelector("img");
+                    alert(`Ampliar imagem: ${img.alt}\n\nGaleria completa em desenvolvimento!`);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
